@@ -15,7 +15,7 @@ with DAG(
         in_cluster=True,
         namespace="airflow-system"
         )
-    def sleep_for_some_time(sleep_time):
+    def sleep_for_some_time(sleep_time: int) -> int:
         import time
 
         print("Hello from k8s pod")
@@ -23,7 +23,7 @@ with DAG(
         return sleep_time
 
     @task.kubernetes(image="python:3.10-slim-buster", namespace="airflow-system", in_cluster=True)
-    def print_pattern(n):
+    def print_pattern(n: int) -> None:
         #n = 5
         for i in range(0, n):
             # inner loop to handle number of columns
